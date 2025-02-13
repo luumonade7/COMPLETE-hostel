@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration</title>
+    <link rel="stylesheet" href="register.css">
+    <script>
+        function validateForm() {
+            var name = document.forms["registerForm"]["name"].value;
+            var email = document.forms["registerForm"]["email"].value;
+            var phone = document.forms["registerForm"]["phone"].value;
+            var password = document.forms["registerForm"]["password"].value;
+            var room = document.forms["registerForm"]["room"].value;
+
+            // Name validation
+            if (name === "") {
+                alert("Please enter your full name.");
+                return false;
+            }
+
+            // Email validation
+            var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            if (!emailPattern.test(email)) {
+                alert("Please enter a valid email address.");
+                return false;
+            }
+
+            // Phone validation (10-digit number)
+            var phonePattern = /^[0-9]{10}$/;
+            if (!phonePattern.test(phone)) {
+                alert("Please enter a valid 10-digit phone number.");
+                return false;
+            }
+
+            // Password validation (Minimum 8 characters)
+            if (password.length < 8) {
+                alert("Password must be at least 8 characters long.");
+                return false;
+            }
+
+            // Room validation
+            if (room === "") {
+                alert("Please select a room preference.");
+                return false;
+            }
+
+            // If everything is valid
+            alert("Registration Successful!");
+            return true;
+        }
+    </script>
+</head>
+<body>
+
+    <header>
+        <h1>Hostel Management System</h1>
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="register.html">Register</a></li>
+                <li><a href="rooms.html">Rooms</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="register">
+        <h2>Student Registration</h2>
+        <form name="registerForm" action="register.php" method="post" onsubmit="return validateForm()">
+            <input type="text" name="name" placeholder="Full Name" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="tel" name="phone" placeholder="Phone Number" pattern="[0-9]{10}" required>
+            <input type="password" name="password" placeholder="Password (Min 8 characters)" required>
+
+            <!-- Dropdown List for Room Selection -->
+            <select name="room" required>
+                <option value="">Select Room Type</option>
+                <option value="Single">Single</option>
+                <option value="Double">Double</option>
+                <option value="Deluxe">Deluxe</option>
+            </select>
+
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+
+    <footer id="contact">
+        <p>Contact us at: <a href="mailto:homehostel@gmail.com">homehostel@gmail.com</a> | Phone: +977 9866543787</p>
+    </footer>
+
+</body>
+</html>
